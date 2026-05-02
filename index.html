@@ -5,309 +5,557 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AI Builders Digest · 2026-05-02</title>
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{font-size:16px;scroll-behavior:smooth}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Helvetica Neue",Helvetica,Arial,sans-serif;background:#0c0c0c;color:#e0e0e0;line-height:1.7;-webkit-font-smoothing:antialiased}
-.wrap{max-width:680px;margin:0 auto;padding:40px 20px 80px}
-h1{font-size:28px;font-weight:600;letter-spacing:-0.3px;color:#fff;margin-bottom:4px}
-.date{font-size:14px;color:#666;margin-bottom:40px}
-h2{font-size:20px;font-weight:600;color:#fff;margin-bottom:24px;display:flex;align-items:center;gap:8px}
-h2 .num{color:#444;font-weight:400;font-size:16px}
-h2::after{content:'';flex:1;height:1px;background:#222;margin-left:12px}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { font-size: 17px; }
+body {
+  background: #0c0c0c;
+  color: #d4d4d4;
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "SF Pro Text", "Helvetica Neue", sans-serif;
+  line-height: 1.7;
+  padding: 2.4rem 1.2rem;
+  max-width: 720px;
+  margin: 0 auto;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: #888; text-decoration: none; }
+a:hover { color: #ccc; }
 
-/* insights */
-.insight{margin-bottom:36px;border:1px solid #222;border-radius:12px;padding:24px;transition:border-color .2s,transform .2s;cursor:default}
-.insight:hover{border-color:#444;transform:translateY(-1px)}
-.insight-tag{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:#888;border:1px solid #333;border-radius:4px;padding:2px 8px;margin-bottom:12px}
-.insight h3{font-size:18px;font-weight:600;color:#fff;margin-bottom:10px;line-height:1.4}
-.insight p{font-size:15px;color:#aaa;margin-bottom:12px}
-.insight .fold{font-size:13px;color:#666;border-top:1px solid #222;padding-top:12px;user-select:none}
-.insight .fold-btn{display:inline-flex;align-items:center;gap:4px;color:#666;cursor:pointer;font-size:13px;text-decoration:none;border-bottom:1px solid #444;padding-bottom:1px}
-.insight .fold-btn::after{content:'▾';font-size:10px;transition:transform .3s}
-.insight .fold-btn.open::after{transform:rotate(180deg)}
-.insight .fold-content{max-height:0;overflow:hidden;transition:max-height .4s ease,opacity .3s;opacity:0;padding-top:0}
-.insight .fold-content.open{max-height:2000px;opacity:1;padding-top:10px}
-.insight blockquote{font-size:14px;color:#999;border-left:2px solid #333;padding:8px 0 8px 14px;margin:6px 0}
-.insight blockquote .attr{font-size:12px;color:#555;display:block;margin-top:4px}
-.insight blockquote .attr a{color:#555;text-decoration:none;border-bottom:1px solid #333}
-.insight blockquote .attr a:hover{color:#888}
+/* header */
+.site-header { margin-bottom: 4rem; }
+.site-header h1 {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #f0f0f0;
+  letter-spacing: -0.02em;
+}
+.site-header .sub {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.3rem;
+  font-weight: 400;
+}
 
-/* matters */
-.matter-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:0}
-.matter{border:1px solid #222;border-radius:8px;padding:14px 18px;font-size:14px;line-height:1.5}
-.matter strong{color:#ddd;font-weight:600}
-.matter span{color:#777}
+/* sections */
+.section { margin-bottom: 3.8rem; }
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #f0f0f0;
+  margin-bottom: 1.6rem;
+  letter-spacing: -0.01em;
+}
+.section-divider { border: none; border-top: 1px solid #222; margin: 3.8rem 0; }
+
+/* insight cards */
+.insight-card {
+  background: #111;
+  border: 1px solid #1e1e1e;
+  border-radius: 12px;
+  padding: 1.6rem;
+  margin-bottom: 1.6rem;
+  transition: translate 0.2s ease, border-color 0.2s ease;
+  cursor: default;
+}
+.insight-card:hover {
+  translate: 0 -1px;
+  border-color: #333;
+}
+.insight-tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #777;
+  border: 1px solid #333;
+  border-radius: 4px;
+  padding: 0.1rem 0.6rem;
+  margin-bottom: 0.7rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+.insight-headline {
+  font-size: 1.12rem;
+  font-weight: 600;
+  color: #eee;
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+}
+.insight-analysis {
+  color: #aaa;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+.insight-toggle {
+  font-size: 0.82rem;
+  color: #666;
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+  padding-left: 0;
+  border-bottom: 1px dashed #333;
+  display: inline-block;
+}
+.insight-toggle::after {
+  content: " ▸";
+  display: inline-block;
+  transition: rotate 0.2s ease;
+}
+.insight-toggle.open::after {
+  rotate: 90deg;
+}
+.insight-toggle:hover { color: #999; }
+.insight-quotes {
+  display: none;
+  padding: 1rem 0 0 0;
+  font-size: 0.88rem;
+  color: #777;
+  border-top: 1px solid #1a1a1a;
+  margin-top: 0.8rem;
+}
+.insight-quotes.open { display: block; }
+.insight-quotes blockquote {
+  padding: 0.6rem 0 0.6rem 1rem;
+  border-left: 2px solid #333;
+  margin-bottom: 0.8rem;
+  font-style: normal;
+  line-height: 1.6;
+}
+.insight-quotes .quote-src {
+  display: block;
+  font-size: 0.78rem;
+  color: #555;
+  margin-top: 0.3rem;
+}
+
+/* matter cards */
+.matter-card {
+  display: flex;
+  gap: 0.8rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid #181818;
+}
+.matter-card:first-child { border-top: none; }
+.matter-index {
+  flex-shrink: 0;
+  width: 1.4rem;
+  color: #444;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+.matter-body { flex: 1; }
+.matter-topic {
+  font-weight: 500;
+  color: #ddd;
+  font-size: 0.94rem;
+  margin-bottom: 0.15rem;
+}
+.matter-context {
+  color: #777;
+  font-size: 0.88rem;
+}
 
 /* sources */
-.section{padding-top:0;margin-bottom:52px}
-.section+.section{border-top:1px solid #222;padding-top:40px}
+.source-group { margin-bottom: 2.2rem; }
+.source-group:last-child { margin-bottom: 0; }
+.source-person {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #e0e0e0;
+  margin-bottom: 0.1rem;
+}
+.source-handle {
+  font-size: 0.8rem;
+  color: #555;
+  margin-bottom: 0.2rem;
+}
+.source-bio {
+  font-size: 0.78rem;
+  color: #555;
+  margin-bottom: 0.8rem;
+  line-height: 1.5;
+}
+.source-tweet {
+  padding: 0.7rem 0 0.7rem 0.8rem;
+  border-left: 1px solid #1e1e1e;
+  margin-bottom: 0.5rem;
+}
+.source-tweet-text { font-size: 0.88rem; color: #aaa; line-height: 1.6; }
+.source-tweet-meta {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.72rem;
+  color: #444;
+  margin-top: 0.3rem;
+}
+.source-tweet-link a { color: #555; font-size: 0.72rem; }
 
-.builder-group{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid #1a1a1a}
-.builder-group:last-child{border-bottom:none;margin-bottom:0}
-.builder-header{margin-bottom:10px}
-.builder-header .name{font-size:15px;font-weight:600;color:#e0e0e0}
-.builder-header .handle{font-size:13px;color:#555;margin-left:6px}
-.builder-header .bio{font-size:12px;color:#555;margin-top:2px}
-.tweet{font-size:14px;color:#aaa;padding:10px 0 8px;border-bottom:1px solid #181818;line-height:1.55}
-.tweet:last-child{border-bottom:none}
-.tweet .meta{font-size:11px;color:#444;margin-top:4px}
-.tweet .meta a{color:#444;text-decoration:none}
-.tweet .meta a:hover{color:#777}
-
-@media(max-width:480px){
-.wrap{padding:24px 16px 60px}
-h1{font-size:24px}
-.insight{padding:18px}
-.matter{padding:12px 14px}
+@media (min-width: 600px) {
+  body { padding: 3rem 2rem; }
+  .insight-card { padding: 2rem; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-<h1>AI Builders Digest</h1>
-<div class="date">2026 年 5 月 2 日 · 周六</div>
+<header class="site-header">
+  <h1>AI Builders Digest</h1>
+  <span class="sub">2026-05-02 · 洞察 · 议题 · 原文</span>
+</header>
 
-<!-- INSIGHTS -->
-<div class="section">
-<h2><span class="num">01</span>洞察 <span style="font-size:13px;font-weight:400;color:#555;margin-left:6px">/ Insights</span></h2>
+<!-- ============ 01 INSIGHTS ============ -->
+<section class="section">
+  <h2 class="section-title">01 洞察<span style="font-weight:400;color:#555;font-size:0.7rem;margin-left:0.5rem;">Insights</span></h2>
 
-<div class="insight">
-<div class="insight-tag">产品范式</div>
-<h3>「无代码」不是终点，LLM-native 才是真正的产品分水岭</h3>
-<p>Karpathy 在 Sequoia Ascent 上提出一个关键命题：LLM 的价值远不止「加速已有流程」。他举了三个例子——menugen（全由 LLM 原生处理的图→图应用）、install.md（用自然语言脚本替代 bash）、以及基于非结构化知识的检索系统——来说明一个事实：有些东西 <em>过去根本不可能存在</em>，不是因为技术不够成熟，而是因为古典代码范式无法描述它。当产品第一次能做到「过去不可能的事」，而不只是「更快的事」，才真正迈入了新范式。</p>
-<div class="fold">
-<div class="fold-btn" onclick="toggleFold(this)">查看原文</div>
-<div class="fold-content">
-<blockquote>menugen: an app that can be fully engulfed by LLMs, with no classical code needed<br><br>install .md skills instead of install .sh scripts. Why create a complex Software 1.0 bash script … if you can write the installation out in words and say 'just show this to your LLM'<br><br>LLM knowledge bases as an example of something that was *impossible* with classical code because it's computation over unstructured data (knowledge) from arbitrary sources and in arbitrary formats<br><br>in every new paradigm change, the obvious things are always in the realm of speeding up … but here we have examples of functionality that either suddenly perhaps shouldn't even exist, or was fundamentally not possible before.<div class="attr">— Andrej Karpathy · <a href="https://x.com/karpathy/status/2049903821095354523" target="_blank">source</a></div></blockquote>
-</div>
-</div>
-</div>
+  <!-- Insight 1 -->
+  <div class="insight-card">
+    <span class="insight-tag">产品范式</span>
+    <div class="insight-headline">Agent-native 不是概念，是真切的产品差异</div>
+    <div class="insight-analysis">
+      Karpathy 在 Sequoia Ascent 上的 keynote 清晰地划出了一条界线：LLM 的真正价值不在加速已有流程，而在解锁此前不可能的事。他举的三个例子——menugen（全 LLM 应用）、install .md（安装说明即脚本）、LLM 知识库——共同指向一个判断：当产品的核心逻辑可以被自然语言而非传统代码承载时，设计范式本身变了。Swyx 用 OpenClaw + Devin + Townie 运营 AI Engineer 团队的实践是这个判断的实证——一个百万级开发者社区由一个 "Tiny Team" 驱动，因为 agent 接管了从 CMS 到招聘的全部执行层。这不是未来学，是正在发生的组织重构。
+    </div>
+    <span class="insight-toggle" onclick="toggleQuote(this)">查看原文</span>
+    <div class="insight-quotes">
+      <blockquote>
+        "LLMs are about a lot more than just speeding up what existed before… three examples of new horizons: menugen, install .md skills instead of install .sh scripts, LLM knowledge bases as an example of something that was *impossible* with classical code."
+        <span class="quote-src">— Andrej Karpathy <a href="https://x.com/karpathy/status/2049903821095354523">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "I gave a short talk on how we use agents to run @aidotengineer as a Tiny Team that now serves ~1m unique developers a month for free… everything from CMS to renting lobster inflatables."
+        <span class="quote-src">— Swyx <a href="https://x.com/swyx/status/2050068468498842058">[x]</a></span>
+      </blockquote>
+    </div>
+  </div>
 
-<div class="insight">
-<div class="insight-tag">经济模型</div>
-<h3>Agent 经济的定价逻辑正在重构：Seat 不死，但 Consumption 才是增量所在</h3>
-<p>Box CEO Aaron Levie 发了一篇干货长文，系统推演了 Agent 时代的软件定价。核心判断：人类用户的 Seat 模式不会消失，但必须捆绑 API 用量，否则就是死路一条。真正棘手的部分是 Agent 的定价——同一个公司可以 1 个 Agent 干所有事，也可以拆成 1000 个细粒度代理，按人头定价完全失效。Levie 的判断是：超过 Seat 配额的用量走 consumption，且 API 会从「按调用次数」向「按 outcome」演进。这对所有面向企业的 SaaS 和 AI 平台都是一个必须面对的架构选择。</p>
-<div class="fold">
-<div class="fold-btn" onclick="toggleFold(this)">查看原文</div>
-<div class="fold-content">
-<blockquote>As agents become the biggest users of software, then all software has to be available in a headless fashion. Agents won't be using your UI, they'll be talking to your APIs.<br><br>1) Seats don't go away for *people* … when the customer pays for a seat, it has to come with a set of usage of APIs on behalf of that user that the agent can use.<br><br>2) Agents may have 'seats' if they are doing stateful work … the only issue on pricing here is that one customer could decide to do all their work in 1 agent, and another might split it into 1,000 agents.<br><br>3) The dominant pricing for headless use … will be a consumption model … there may need to be new types of APIs that represent the work an agent would do in one go—more akin to an outcome—instead of a series of API calls.<div class="attr">— Aaron Levie · <a href="https://x.com/levie/status/2050051426446152159" target="_blank">source</a></div></blockquote>
-</div>
-</div>
-</div>
+  <!-- Insight 2 -->
+  <div class="insight-card">
+    <span class="insight-tag">经济模型</span>
+    <div class="insight-headline">Agent 经济体的软件定价：席位不会消失，但将兼容消耗制</div>
+    <div class="insight-analysis">
+      Box CEO Aaron Levie 发了一篇罕见的深度 thread，系统推演 agent 作为软件最大用户时的商业模式。核心论点：席位不会消失——因为人类用户仍然存在——但每个席位必须捆绑 agent 可调用的足够 API 配额；超出部分走消耗制；有状态的长期 agent 可能另设 "agent 席位" 但定价逻辑完全不同。这个框架比任何"AI 将消灭 SaaS"的论断都要务实：它承认 SaaS 的惯性，又指出了不可逆的转型方向。"每款软件都必须 headless 化"不是激进宣言，而是对 agent 生态的务实地基描述。
+    </div>
+    <span class="insight-toggle" onclick="toggleQuote(this)">查看原文</span>
+    <div class="insight-quotes">
+      <blockquote>
+        "As agents become the biggest users of software, then all software has to be available in a headless fashion. Agents won't be using your UI, they'll be talking to your APIs."
+        <span class="quote-src">— Aaron Levie <a href="https://x.com/levie/status/2050051426446152159">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "Seats don't go away for *people*… the dominant pricing for headless use that goes above the seat allotment, or when an agent is firmly acting on their own, will be a consumption model."
+        <span class="quote-src">— Aaron Levie <a href="https://x.com/levie/status/2050051426446152159">[x]</a></span>
+      </blockquote>
+    </div>
+  </div>
 
-<div class="insight">
-<div class="insight-tag">战略布局</div>
-<h3>Claude Security 正式公测：AI 安全的「消费级」入口已经铺好</h3>
-<p>Claude 官方发布 Security 公开测试版，内建于 Claude Code 网页端。不只是一个安全扫描器——它的核心逻辑是让安全团队不需要「搭建自定义工具链」就能把 Opus 4.7 用在生产代码上。从 2 月研究预览到公测，产品基于实际反馈新增了定时扫描、目录级定位、CSV/Markdown 导出、webhook 通知等功能。而 Cat Wu 的完整推文透露出一个更大的信号：这套能力是直接从 Claude Code 环境中迸发的，意味着安全检测正在从「独立工具」变成「开发环境的原生能力」。</p>
-<div class="fold">
-<div class="fold-btn" onclick="toggleFold(this)">查看原文</div>
-<div class="fold-content">
-<blockquote>Claude Security is now in public beta, built into Claude Code on the web. Point it at a repo, get validated vulnerability findings, and fix them in the same place you're already writing code.<div class="attr">— Cat Wu · <a href="https://x.com/_catwu/status/2049964403177689130" target="_blank">source</a></div></blockquote>
-<blockquote>Many security teams have asked how to put Opus 4.7 to work on their code without standing up custom tooling. Claude Security is that on-ramp: no API integration or agent build required.<div class="attr">— Claude · <a href="https://x.com/claudeai/status/2049898741772021991" target="_blank">source</a></div></blockquote>
-</div>
-</div>
-</div>
+  <!-- Insight 3 -->
+  <div class="insight-card">
+    <span class="insight-tag">战略布局</span>
+    <div class="insight-headline">Codex 的边界正在溢出编程场景，agent 操作系统化加速</div>
+    <div class="insight-analysis">
+      Sam Altman 亲自喊话 "try Codex for non-coding computer work" 是一个信号——OpenAI 不再把 Codex 定位为"代码助手"，而是泛化的计算机操控层。Peter Steinberger 的 "codex doesn't create random markdowns" 双关语背后是真实的能力跃迁。同时 Claude Code 桌面版以平行 agent 架构重设计、Claude Security 以 Opus 4.7 为内核上线公测——两个顶级实验室的 CLI→桌面→安全纵深都在同一天推进。这不是平行发生，而是竞争驱动的同步加速：agent 不再只是写代码的工具，它在成为操作系统的替代者。
+    </div>
+    <span class="insight-toggle" onclick="toggleQuote(this)">查看原文</span>
+    <div class="insight-quotes">
+      <blockquote>
+        "big upgrade for codex today! try it for non-coding computer work."
+        <span class="quote-src">— Sam Altman <a href="https://x.com/sama/status/2049946120441520624">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "Many security teams have asked how to put Opus 4.7 to work on their code without standing up custom tooling. Claude Security is that on-ramp."
+        <span class="quote-src">— Claude <a href="https://x.com/claudeai/status/2049898741772021991">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "Redesigning Claude Code on desktop for parallel agents"
+        <span class="quote-src">— Claude Blog <a href="https://claude.com/blog/claude-code-desktop-redesign">[link]</a></span>
+      </blockquote>
+    </div>
+  </div>
 
-<div class="insight">
-<div class="insight-tag">产业信号</div>
-<h3>Coding Agents「出圈」了：非程序员群体开始感知 AGI 的第一触点竟是 coding agent</h3>
-<p>Swyx 在 AIE EU 闭幕演讲中明确提出一个论断：coding agents breaking containment 是今年的突破主题。他认为 2026 年是非程序员被 AGI 「说服」的一年——不是通过聊天机器人，而是通过看到 coding agent 在真实知识工作中完成从 CMS 管理到「租充气龙虾」这种荒唐任务的跨度。他所在的 tiny team 用 OpenClaw、Devin、Town 等 agent 跑通了一个月服务 100 万开发者的运营流程。当代理的实用性从开发溢出到日常运营，边界模糊本身就是信号。</p>
-<div class="fold">
-<div class="fold-btn" onclick="toggleFold(this)">查看原文</div>
-<div class="fold-content">
-<blockquote>i said … recently that 'coding agents breaking containment' is the breakout theme of the year. i meant it—this is the year all knowledge workers, not just coders, get AGI-pilled.<br><br>I gave a short talk on how we use agents to run @aidotengineer as a Tiny Team that now serves ~1m unique developers a month for free … from CMS to renting lobster inflatables.<br><br>yep I use @openclaw personally and as a team we use @cognition's Devin and @townai, but this isn't about any one agent; it's about all of them, and how you are probably not trying hard enough to use them for daily knowledge work.<div class="attr">— Swyx · <a href="https://x.com/swyx/status/2050068468498842058" target="_blank">source</a></div></blockquote>
-</div>
-</div>
-</div>
+  <!-- Insight 4 -->
+  <div class="insight-card">
+    <span class="insight-tag">设计民主化</span>
+    <div class="insight-headline">"Prompt → LLC"：从一句话到一家公司的距离在消失</div>
+    <div class="analysis">
+      Replit CEO Amjad Masad 的 "Prompt ➡️ LLC" 是本周最短、最有力的一句话宣言。Zara Zhang 用 ChatGPT Image 2 做幻灯片、"太好玩了"，Guillermo Rauch 用 v0 两轮 prompt 就做出了 "Vercel 收购 GitHub 的样子"。这几个信号叠加起来指出的方向是：从设计稿到公司注册到产品原型，"表达意图" 和 "得到成品" 之间的摩擦正在以周为单位降低。当设计的边界被推到只靠对话就能跨过时，设计师的角色不再只是"做界面"，而是"定义概念系统"——正如 Ryo Lu 本周的那篇设计哲学写得比绝大多数产品文章都透彻。
+    </div>
+    <span class="insight-toggle" onclick="toggleQuote(this)">查看原文</span>
+    <div class="insight-quotes">
+      <blockquote>
+        "Prompt ➡️ LLC"
+        <span class="quote-src">— Amjad Masad <a href="https://x.com/amasad/status/2049934937688854993">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "Using ChatGPT Image 2 to make slides is SO fun"
+        <span class="quote-src">— Zara Zhang <a href="https://x.com/zarazhangrui/status/2050084126414471221">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "flexibility isn't the absence of opinion. it's the result of a strong opinion held in cohesion… simple at the core. open at the edges."
+        <span class="quote-src">— Ryo Lu <a href="https://x.com/ryolu_/status/2049866003287576978">[x]</a></span>
+      </blockquote>
+    </div>
+  </div>
 
-<div class="insight">
-<div class="insight-tag">设计民主化</div>
-<h3>从 Notion 到 Cursor：系统设计的本质论正在被重新书写</h3>
-<p>Cursor 设计师 Ryo Lu 发了一条值得深思的推文，谈「opinionated vs general purpose」的对立是假的。他认为「没有意见本身就是一个强烈的意见」——决定哪些概念存在、哪些可见、哪些可组合，就已经表达了世界观。好的系统设计不是在「多功能」和「固定流程」之间选择，而是找到最小的核心概念集（simple at the core, open at the edges），让这些基元足够灵活能够折叠成多种形态而不破坏底层逻辑。这比「以用户为中心」更深一层：用户反馈告诉你摩擦在哪，但很少告诉你底层系统应该是什么。这种思考在 AI 工具的快速迭代期尤其珍贵——当能力边界每天都在变化时，底层概念的设计反而成了产品韧性最关键的因素。</p>
-<div class="fold">
-<div class="fold-btn" onclick="toggleFold(this)">查看原文</div>
-<div class="fold-content">
-<blockquote>no opinion is opinionated. people treat 'opinionated' and 'general purpose' as opposites. they're not. the moment you decide what concepts exist, what's visible, what composes, what extends, what hides – you've already expressed a worldview.<br><br>this is also why pure customer-centricity falls short. user feedback tells you where friction is. it rarely tells you what the underlying system should be. if you only follow direct user demand, you converge on local maxima – fragmented features, narrow tools, products shaped around current habits rather than enduring concepts.<br><br>simple at the core. open at the edges. that's the ultimate opinion.<div class="attr">— Ryo Lu · <a href="https://x.com/ryolu_/status/2049866003287576978" target="_blank">source</a></div></blockquote>
-</div>
-</div>
-</div>
+  <!-- Insight 5 -->
+  <div class="insight-card">
+    <span class="insight-tag">产业信号</span>
+    <div class="insight-headline">AI 安全攻防进入"以 AI 治 AI"的新阶段</div>
+    <div class="analysis">
+      Aditya Agarwal 与 Palo Alto Networks CEO Nikesh Arora 的播客对话是这个信号的最完整表述。攻击者有 AI，防御者也只有 AI 才能跟上。Claude Security 的公测是同方向的产品印证——Opus 4.7 直接嵌入到代码安全审计流程中，不需要额外搭建 agent。Peter Steinberger 也与 NVIDIA、OpenAI、Microsoft、GitHub、腾讯混元等多个安全团队合作加固 OpenClaw 的安全。当 agent 开始渗透操作系统层，安全和信任不再是外部附加，而是产品架构的第一性要求。
+    </div>
+    <span class="insight-toggle" onclick="toggleQuote(this)">查看原文</span>
+    <div class="insight-quotes">
+      <blockquote>
+        "The attackers have AI. So do the defenders. Cybersecurity has a new shape: AI is both the threat and the only viable solution."
+        <span class="quote-src">— Aditya Agarwal <a href="https://x.com/adityaag/status/2049874181509034151">[x]</a></span>
+      </blockquote>
+      <blockquote>
+        "I learned a lot about the security ecosystem in the last few months. Amazing to work with @nvidia @OpenAI @Microsoft @GitHub @TencentHunyuan @convex @Atlassian @useblacksmith to get secure the claw."
+        <span class="quote-src">— Peter Steinberger <a href="https://x.com/steipete/status/2049976855617314991">[x]</a></span>
+      </blockquote>
+    </div>
+  </div>
+</section>
 
-</div>
+<hr class="section-divider">
 
-<!-- MATTERS -->
-<div class="section">
-<h2><span class="num">02</span>议题 <span style="font-size:13px;font-weight:400;color:#555;margin-left:6px">/ Matters</span></h2>
+<!-- ============ 02 MATTERS ============ -->
+<section class="section">
+  <h2 class="section-title">02 议题<span style="font-weight:400;color:#555;font-size:0.7rem;margin-left:0.5rem;">Matters</span></h2>
 
-<div class="matter-grid">
+  <div class="matter-card">
+    <div class="matter-index">1</div>
+    <div class="matter-body">
+      <div class="matter-topic">Coding agents "breaking containment" 是年度突破主题</div>
+      <div class="matter-context">Swyx 在 AI Engineer EU 闭幕演讲中断言：coding agent 的越界能力正在让所有知识工作者（而非仅程序员）意识到 AGI 的实感。</div>
+    </div>
+  </div>
 
-<div class="matter"><strong>Sam Altman 宣布 Codex 大升级，强调「用于非编程的电脑操作」</strong> <span>——Codex 的定位正在从「编程助手」转向「通用电脑代理」，这是 agent infrastructure 层最重要的一次能力释放。</span></div>
+  <div class="matter-card">
+    <div class="matter-index">2</div>
+    <div class="matter-body">
+      <div class="matter-topic">Garry Tan 为 GBrain + OpenClaw 场景站台</div>
+      <div class="matter-context">YC CEO 亲自推广开源项目 GBrain，定位为 OpenClaw/Hermes 场景的"个人 AI 记忆层"，三周内已开辟新品类。</div>
+    </div>
+  </div>
 
-<div class="matter"><strong>OpenClaw 连续多日成为高频讨论对象</strong> <span>——从 Garry Tan 推荐 GBrain + OpenClaw 方案，到 Peter Steinberger 强调群聊体验「脱胎换骨」并切换 codex 引擎，以及 Peter Yang 吐槽更新体验——生态正在快速成熟。</span></div>
+  <div class="matter-card">
+    <div class="matter-index">3</div>
+    <div class="matter-body">
+      <div class="matter-topic">Demis Hassabis：AGI 2030 年达成，二十年计划"如期推进"</div>
+      <div class="matter-context">在 Training Data 播客中，DeepMind 创始人重审了 DeepMind 创建时的二十年路线图，认为 AI for Science 的下一个十年将从 AlphaFold 进入药化设计全流程。</div>
+    </div>
+  </div>
 
-<div class="matter"><strong>Replit CEO Amjad Masad 抛出「Prompt ➡ LLC」</strong> <span>——Prompt 到有限责任公司的转化路径，暗示 AI 原生的商业模式可以从一行提示开始，Company-as-a-Service 不再是科幻。</span></div>
+  <div class="matter-card">
+    <div class="matter-index">4</div>
+    <div class="matter-body">
+      <div class="matter-topic">Amanda Askell 罕见发声：网络虚构内容已影响真实人物</div>
+      <div class="matter-context">Anthropic 的伦理研究员发文回应互联网上关于她个人形象的编造内容，指出"编造很简单，但亲身经历很奇怪"，引发对其工作内容真实边界的讨论。</div>
+    </div>
+  </div>
 
-<div class="matter"><strong>Vercel CEO Guillermo Rauch 用 v0 演示「如果 Vercel 收购 GitHub 会怎样」</strong> <span>——2 个 prompt 生成一个完整设计稿，683 个赞说明 AI 设计工具在开发者群体中的接受度已到新高度。</span></div>
+  <div class="matter-card">
+    <div class="matter-index">5</div>
+    <div class="matter-body">
+      <div class="matter-topic">OpenClaw 群聊体验再次提升，Codex 加持效果显著</div>
+      <div class="matter-context">Peter Steinberger 发布更新：OpenClaw 在群聊中的对话质量大幅改善，并强烈推荐切换 codex harness 以获得更好的性能表现。</div>
+    </div>
+  </div>
 
-<div class="matter"><strong>Amanda Askell 两次发声抵制关于自己的网络虚构内容</strong> <span>——Anthropic 首席哲学家罕见地在公开渠道划清底线：「我的工作很有趣也很重要，但请不要编造关于我的故事。」</span></div>
+  <div class="matter-card">
+    <div class="matter-index">6</div>
+    <div class="matter-body">
+      <div class="matter-topic">GPT Image 2 正在成为生产级设计工具</div>
+      <div class="matter-context">从 Peter Yang 求解 YouTube 缩略图 prompt 到 Zara Zhang 直接用 GPT Image 2 做幻灯片，图像生成正在进入专业工作流。</div>
+    </div>
+  </div>
+</section>
 
-<div class="matter"><strong>Demis Hassabis 在 Training Data 播客深入讨论 AI for Science 的下一个里程碑</strong> <span>——从 AlphaFold 到虚拟细胞、AI 模拟器到新科学的诞生，Hassabis 认为生物学是 ML 的完美描述语言，正如数学之于物理学。</span></div>
+<hr class="section-divider">
 
-</div>
-</div>
+<!-- ============ 03 SOURCES ============ -->
+<section class="section">
+  <h2 class="section-title">03 原文<span style="font-weight:400;color:#555;font-size:0.7rem;margin-left:0.5rem;">Sources</span></h2>
 
-<!-- SOURCES -->
-<div class="section">
-<h2><span class="num">03</span>原文 <span style="font-size:13px;font-weight:400;color:#555;margin-left:6px">/ Sources</span></h2>
+  <!-- Karpathy -->
+  <div class="source-group">
+    <div class="source-person">Andrej Karpathy</div>
+    <div class="source-handle">@karpathy</div>
+    <div class="source-bio">I like to train large deep neural nets. Previously Director of AI @ Tesla, founding team @ OpenAI, PhD @ Stanford.</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Fireside chat at Sequoia Ascent 2026 highlights — menugen, install .md vs .sh, LLM knowledge bases, jaggedness of LLMs, agent-native economy</div>
+      <div class="source-tweet-meta"><span>💬 144</span><span>🔄 411</span><span>❤️ 3.4K</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/karpathy/status/2049903821095354523">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">This is the quote I've been citing a lot recently.</div>
+      <div class="source-tweet-meta"><span>💬 488</span><span>🔄 2.8K</span><span>❤️ 31.4K</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/karpathy/status/2049907410303865030">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Andrej Karpathy</span><span class="handle">@karpathy</span>
-<div class="bio">I like to train large deep neural nets. Previously Director of AI @ Tesla, founding team @ OpenAI, PhD @ Stanford.</div>
-</div>
-<div class="tweet">This is the the quote I've been citing a lot recently.<div class="meta"><a href="https://x.com/karpathy/status/2049907410303865030" target="_blank">source · 31.4K likes</a></div></div>
-<div class="tweet">Fireside chat at Sequoia Ascent 2026 from a ~week ago. Some highlights: … [full text includes menugen, install.md, LLM knowledge bases, jaggedness pattern, agent-native economy]<div class="meta"><a href="https://x.com/karpathy/status/2049903821095354523" target="_blank">source · 3.4K likes</a></div></div>
-</div>
+  <!-- Swyx -->
+  <div class="source-group">
+    <div class="source-person">Swyx</div>
+    <div class="source-handle">@swyx</div>
+    <div class="source-bio">achieve ambition with intentionality, intensity, integrity & insanity. affiliations: @dxtipshq, @cognition, @temporalio, @aidotengineer, @latentspacepod</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">"coding agents breaking containment" is the breakout theme of the year. How we use agents to run @aidotengineer as a Tiny Team serving ~1m devs/month</div>
+      <div class="source-tweet-meta"><span>💬 19</span><span>🔄 1</span><span>❤️ 18</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/swyx/status/2050068468498842058">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Swyx</span><span class="handle">@swyx</span>
-<div class="bio">achieve ambition with intentionality, intensity, integrity &amp; insanity. affiliations: @dxtipshq @cognition @temporalio @aidotengineer @latentspacepod</div>
-</div>
-<div class="tweet">i said on @jacobeffron's pod recently that 'coding agents breaking containment' is the breakout theme of the year … [full talk about agents running @aidotengineer as a Tiny Team serving ~1m developers]<div class="meta"><a href="https://x.com/swyx/status/2050068468498842058" target="_blank">source</a></div></div>
-</div>
+  <!-- Aaron Levie -->
+  <div class="source-group">
+    <div class="source-person">Aaron Levie</div>
+    <div class="source-handle">@levie</div>
+    <div class="source-bio">CEO @box - your business lives in content. unleash it with AI</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Thread: As agents become the biggest users of software, all software must be headless. Seats + consumption model for agents. Full framework.</div>
+      <div class="source-tweet-meta"><span>💬 61</span><span>🔄 26</span><span>❤️ 357</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/levie/status/2050051426446152159">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Aaron Levie</span><span class="handle">@levie</span>
-<div class="bio">ceo @box</div>
-</div>
-<div class="tweet">As agents become the biggest users of software, then all software has to be available in a headless fashion… [full pricing analysis: seats, agent seats, consumption model]<div class="meta"><a href="https://x.com/levie/status/2050051426446152159" target="_blank">source · 357 likes</a></div></div>
-</div>
+  <!-- Sam Altman -->
+  <div class="source-group">
+    <div class="source-person">Sam Altman</div>
+    <div class="source-handle">@sama</div>
+    <div class="source-bio">AI is cool i guess</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">big upgrade for codex today! try it for non-coding computer work.</div>
+      <div class="source-tweet-meta"><span>💬 607</span><span>🔄 252</span><span>❤️ 7.8K</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/sama/status/2049946120441520624">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">"artificial goblin intelligence — achieved"</div>
+      <div class="source-tweet-meta"><span>💬 1.1K</span><span>🔄 415</span><span>❤️ 6.2K</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/sama/status/2050021650641695108">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Ryo Lu</span><span class="handle">@ryolu_</span>
-<div class="bio">Design @Cursor_ai. Early @NotionHQ, @Stripe, built startups.</div>
-</div>
-<div class="tweet">no opinion is opinionated … [full essay on system design essence — simple at the core, open at the edges]<div class="meta"><a href="https://x.com/ryolu_/status/2049866003287576978" target="_blank">source · 186 likes</a></div></div>
-<div class="tweet">added cursor sdk to ryOS — now i can make edits to the OS by just chatting with ryo<div class="meta"><a href="https://x.com/ryolu_/status/2049872551955013713" target="_blank">source · 145 likes</a></div></div>
-</div>
+  <!-- Peter Steinberger -->
+  <div class="source-group">
+    <div class="source-person">Peter Steinberger</div>
+    <div class="source-handle">@steipete</div>
+    <div class="source-bio">Polyagentmorous ClawFather. @OpenClaw 🦞 + @OpenAI</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">If you tried OpenClaw in group chats and got mixed results, you GOTTA try again. Switch to codex harness too.</div>
+      <div class="source-tweet-meta"><span>💬 79</span><span>🔄 63</span><span>❤️ 1.2K</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/steipete/status/2049988836160074022">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Security partnerships with NVIDIA, OpenAI, Microsoft, GitHub, Tencent Hunyuan and more for OpenClaw.</div>
+      <div class="source-tweet-meta"><span>💬 23</span><span>🔄 16</span><span>❤️ 509</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/steipete/status/2049976855617314991">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Sam Altman</span><span class="handle">@sama</span>
-<div class="bio">AI is cool i guess</div>
-</div>
-<div class="tweet">big upgrade for codex today! try it for non-coding computer work.<div class="meta"><a href="https://x.com/sama/status/2049946120441520624" target="_blank">source · 7.8K likes</a></div></div>
-<div class="tweet">artificial goblin intelligence — achieved<div class="meta"><a href="https://x.com/sama/status/2050021650641695108" target="_blank">source · 6.2K likes</a></div></div>
-</div>
+  <!-- Amjad Masad -->
+  <div class="source-group">
+    <div class="source-person">Amjad Masad</div>
+    <div class="source-handle">@amasad</div>
+    <div class="source-bio">CEO @replit. civilizationist</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Prompt ➡️ LLC</div>
+      <div class="source-tweet-meta"><span>💬 19</span><span>🔄 12</span><span>❤️ 264</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/amasad/status/2049934937688854993">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">We treat Replit, inc as customer number zero of Replit. Dogfooding with insane ROI.</div>
+      <div class="source-tweet-meta"><span>💬 15</span><span>🔄 8</span><span>❤️ 153</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/amasad/status/2049921597499445677">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Claude / Anthropic</span><span class="handle">@claudeai</span>
-<div class="bio"></div>
-</div>
-<div class="tweet">Available today in public beta for Claude Enterprise customers. Learn more…<div class="meta"><a href="https://x.com/claudeai/status/2049898745051886013" target="_blank">source · 264 likes</a></div></div>
-<div class="tweet">Since the research preview in February, hundreds of organizations have used it on production code… scheduled scans, directory-level targeting, CSV/Markdown exports, webhook notifications added.<div class="meta"><a href="https://x.com/claudeai/status/2049898743772696745" target="_blank">source · 402 likes</a></div></div>
-<div class="tweet">Many security teams have asked how to put Opus 4.7 to work on their code without standing up custom tooling. Claude Security is that on-ramp.<div class="meta"><a href="https://x.com/claudeai/status/2049898741772021991" target="_blank">source · 535 likes</a></div></div>
-</div>
+  <!-- Ryo Lu -->
+  <div class="source-group">
+    <div class="source-person">Ryo Lu</div>
+    <div class="source-handle">@ryolu_</div>
+    <div class="source-bio">Design @Cursor_ai. Early @NotionHQ, @Stripe. I make a world where anyone can make software.</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">"flexibility isn't the absence of opinion. it's the result of a strong opinion held in cohesion… simple at the core, open at the edges."</div>
+      <div class="source-tweet-meta"><span>💬 15</span><span>🔄 11</span><span>❤️ 186</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/ryolu_/status/2049866003287576978">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Added Cursor SDK to ryOS — now can make edits to the OS by just chatting.</div>
+      <div class="source-tweet-meta"><span>💬 9</span><span>🔄 5</span><span>❤️ 145</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/ryolu_/status/2049872551955013713">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Cat Wu</span><span class="handle">@_catwu</span>
-<div class="bio">claude code + cowork @anthropicai, prev: @dagster, @scale_ai</div>
-</div>
-<div class="tweet">Claude Security is now in public beta, built into Claude Code on the web. Point it at a repo, get validated vulnerability findings, and fix them in the same place you're already writing code<div class="meta"><a href="https://x.com/_catwu/status/2049964403177689130" target="_blank">source · 292 likes</a></div></div>
-</div>
+  <!-- Garry Tan -->
+  <div class="source-group">
+    <div class="source-person">Garry Tan</div>
+    <div class="source-handle">@garrytan</div>
+    <div class="source-bio">President & CEO @ycombinator</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">3 weeks ago GBrain and Mempalace looked similar. Now GBrain is its own category ideal for OpenClaw/Hermes personal AI scenarios.</div>
+      <div class="source-tweet-meta"><span>💬 20</span><span>🔄 2</span><span>❤️ 66</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/garrytan/status/2050095919157350644">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Amjad Masad</span><span class="handle">@amasad</span>
-<div class="bio">ceo @replit. civilizationist</div>
-</div>
-<div class="tweet">Prompt ➡ LLC<div class="meta"><a href="https://x.com/amasad/status/2049934937688854993" target="_blank">source · 264 likes</a></div></div>
-<div class="tweet">We treat Replit, inc as customer number zero of Replit. … we expect our usage to have insane ROI.<div class="meta"><a href="https://x.com/amasad/status/2049921597499445677" target="_blank">source · 153 likes</a></div></div>
-</div>
+  <!-- Claude -->
+  <div class="source-group">
+    <div class="source-person">Claude / Anthropic</div>
+    <div class="source-handle">@claudeai</div>
+    <div class="source-bio">AI assistant built by @AnthropicAI</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Claude Security now in public beta — Opus 4.7 security auditing, no custom tooling needed.</div>
+      <div class="source-tweet-meta"><span>💬 12</span><span>🔄 16</span><span>❤️ 535</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/claudeai/status/2049898741772021991">查看原文 →</a></div>
+    </div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Available today in public beta for Claude Enterprise customers.</div>
+      <div class="source-tweet-meta"><span>💬 12</span><span>🔄 13</span><span>❤️ 264</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/claudeai/status/2049898745051886013">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Peter Steinberger</span><span class="handle">@steipete</span>
-<div class="bio">Polyagentmorous ClawFather. @OpenClaw 🦞 + @OpenAI</div>
-</div>
-<div class="tweet">If you tried OpenClaw in group chats and got mixed results, you GOTTA try again. I changed how agents talk there, it IS SO GOOD NOW. … switch to codex harness. Enable both and boom.<div class="meta"><a href="https://x.com/steipete/status/2049988836160074022" target="_blank">source · 1.2K likes</a></div></div>
-<div class="tweet">I learned a lot about the security ecosystem … working with Nvidia, OpenAI, Microsoft, GitHub, Tencent Hunyuan to secure the claw.<div class="meta"><a href="https://x.com/steipete/status/2049976855617314991" target="_blank">source · 509 likes</a></div></div>
-</div>
+  <!-- Demis Hassabis (podcast) -->
+  <div class="source-group">
+    <div class="source-person">Demis Hassabis</div>
+    <div class="source-handle">Training Data Podcast</div>
+    <div class="source-bio">Building DeepMind, AlphaFold, and the Final Stretch to AGI</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Full interview discussing AGI timeline (~2030), AlphaFold, Isomorphic Labs, virtual cell, information as fundamental building block, consciousness.</div>
+      <div class="source-tweet-link"><a href="https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8">收听原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Garry Tan</span><span class="handle">@garrytan</span>
-<div class="bio">President &amp; CEO @ycombinator</div>
-</div>
-<div class="tweet">If you use Hermes Agent or OpenClaw, installing GBrain on top of your Karpathy-style Knowledge Wiki will pay you massive dividends.<div class="meta"><a href="https://x.com/garrytan/status/2050096324100682097" target="_blank">source · 20 likes</a></div></div>
-<div class="tweet">3 weeks ago GBrain and Mempalace looked kind of similar. 3 weeks later, it's clear GBrain is its own category.<div class="meta"><a href="https://x.com/garrytan/status/2050095919157350644" target="_blank">source · 66 likes</a></div></div>
-</div>
+  <!-- Cat Wu -->
+  <div class="source-group">
+    <div class="source-person">Cat Wu</div>
+    <div class="source-handle">@_catwu</div>
+    <div class="source-bio">Claude Code + cowork @AnthropicAI</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Claude Security is now in public beta, built into Claude Code on the web.</div>
+      <div class="source-tweet-meta"><span>💬 17</span><span>🔄 16</span><span>❤️ 292</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/_catwu/status/2049964403177689130">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Dan Shipper</span><span class="handle">@danshipper</span>
-<div class="bio">ceo @every</div>
-</div>
-<div class="tweet">experimenting with using Codex + Chronicle as a focus tracker<div class="meta"><a href="https://x.com/danshipper/status/2049913064561258986" target="_blank">source · 81 likes</a></div></div>
-</div>
+  <!-- Nikunj Kothari -->
+  <div class="source-group">
+    <div class="source-person">Nikunj Kothari</div>
+    <div class="source-handle">@nikunj</div>
+    <div class="source-bio">Partner @fpvventures</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">All these MCPs/CLIs are clearly showing that "big" models are going to be how we orchestrate our lives. First terminal, then computer use, soon the entire OS.</div>
+      <div class="source-tweet-meta"><span>💬 9</span><span>🔄 2</span><span>❤️ 39</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/nikunj/status/2049871924105531672">查看原文 →</a></div>
+    </div>
+  </div>
 
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Guillermo Rauch</span><span class="handle">@rauchg</span>
-<div class="bio">@vercel CEO</div>
-</div>
-<div class="tweet">Asked @v0 what it would look like if @vercel shipped @github (2 prompts)<div class="meta"><a href="https://x.com/rauchg/status/2049959307941179678" target="_blank">source · 683 likes</a></div></div>
-</div>
-
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Amanda Askell</span><span class="handle">@AmandaAskell</span>
-<div class="bio">Philosopher &amp; ethicist trying to make AI be good @AnthropicAI</div>
-</div>
-<div class="tweet">I've increasingly seen content written about me that's asserted very confidently but is also completely made up.<div class="meta"><a href="https://x.com/AmandaAskell/status/2050020603323904369" target="_blank">source · 824 likes</a></div></div>
-<div class="tweet">It's also weird because why are you even writing about me in the first place? I'm very boring.<div class="meta"><a href="https://x.com/AmandaAskell/status/2050021990023758206" target="_blank">source · 305 likes</a></div></div>
-<div class="tweet">To be clear, the kind of *work* I do is far from boring and I want people to engage with it because I think it's both difficult and important.<div class="meta"><a href="https://x.com/AmandaAskell/status/2050050486523560053" target="_blank">source · 129 likes</a></div></div>
-</div>
-
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Nikunj Kothari</span><span class="handle">@nikunj</span>
-<div class="bio">partner @fpvventures</div>
-</div>
-<div class="tweet">All these MCPs/CLIs are clearly showing that 'big' models are going to be how we orchestrate our lives. Be in the path of these models using you—or you'll simply cease to exist. First, terminal. Then, computer use. Soon, the entire OS.<div class="meta"><a href="https://x.com/nikunj/status/2049871924105531672" target="_blank">source · 39 likes</a></div></div>
-</div>
-
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Aditya Agarwal</span><span class="handle">@adityaag</span>
-<div class="bio">GP @SouthPkCommons, Co-Founder @Bevel_Health</div>
-</div>
-<div class="tweet">Podcast with Palo Alto Networks CEO: Cybersecurity has a new shape—AI is both the threat and the only viable solution. 45-min breakdown.<div class="meta"><a href="https://x.com/adityaag/status/2049874181509034151" target="_blank">source · 86 likes</a></div></div>
-</div>
-
-<div class="builder-group">
-<div class="builder-header">
-<span class="name">Demis Hassabis</span><span class="handle">—</span>
-<div class="bio">DeepMind CEO · Training Data Podcast</div>
-</div>
-<div class="tweet">Podcast episode: Building DeepMind, AlphaFold, the Final Stretch to AGI. Key topics: AI for science, virtual cell, simulations as new science, drug discovery from 10 years to months/weeks/days, consciousness, and AGI by 2030.<div class="meta"><a href="https://www.youtube.com/playlist?list=PLOhHNjZItNnMm5tdW61JpnyxeYH5NDDx8" target="_blank">source · Training Data</a></div></div>
-</div>
-
-</div>
-
-</div>
-
-<script>
-function toggleFold(btn){
-btn.classList.toggle('open');
-var content = btn.parentElement.querySelector('.fold-content');
-content.classList.toggle('open');
-}
-</script>
-</body>
-</html>
+  <!-- Dan Shipper -->
+  <div class="source-group">
+    <div class="source-person">Dan Shipper</div>
+    <div class="source-handle">@danshipper</div>
+    <div class="source-bio">CEO @every</div>
+    <div class="source-tweet">
+      <div class="source-tweet-text">Using Codex + Chronicle as a focus tracker.</div>
+      <div class="source-tweet-meta"><span>💬 3</span><span>❤️ 81</span></div>
+      <div class="source-tweet-link"><a href="https://x.com/danshipper/status/2049913064561258986">
